@@ -44,6 +44,10 @@ from .views import (
     GiteaOauthInitiateEndpoint,
     GiteaCallbackSpaceEndpoint,
     GiteaOauthInitiateSpaceEndpoint,
+    KeycloakCallbackEndpoint,
+    KeycloakOauthInitiateEndpoint,
+    KeycloakCallbackSpaceEndpoint,
+    KeycloakOauthInitiateSpaceEndpoint,
 )
 
 urlpatterns = [
@@ -114,6 +118,19 @@ urlpatterns = [
         "spaces/gitlab/callback/",
         GitLabCallbackSpaceEndpoint.as_view(),
         name="space-gitlab-callback",
+    ),
+    ## Keycloak Oauth
+    path("keycloak/", KeycloakOauthInitiateEndpoint.as_view(), name="keycloak-initiate"),
+    path("keycloak/callback/", KeycloakCallbackEndpoint.as_view(), name="keycloak-callback"),
+    path(
+        "spaces/keycloak/",
+        KeycloakOauthInitiateSpaceEndpoint.as_view(),
+        name="space-keycloak-initiate",
+    ),
+    path(
+        "spaces/keycloak/callback/",
+        KeycloakCallbackSpaceEndpoint.as_view(),
+        name="space-keycloak-callback",
     ),
     # Email Check
     path("email-check/", EmailCheckEndpoint.as_view(), name="email-check"),
